@@ -9,33 +9,37 @@ function startServer() {
   console.log('Starting backend server process...');
   
   const isDev = !app.isPackaged && process.env.NODE_ENV !== 'production';
-  let cmd;
-  let args;
   
   if (isDev) {
-    cmd = process.platform === 'win32' ? 'npx.cmd' : 'npx';
-    args = ['tsx', 'server.ts'];
+    const cmd = process.platform === 'win32' ? 'npx.cmd' : 'npx';
+    const args = ['tsx', 'server.ts'];
+    serverProcess = spawn(cmd, args, {
+      env: { ...process.env, NODE_ENV: 'development' },
+      shell: true
+    });
+
+    serverProcess.stdout.on('data', (data) => {
+      console.log(`[Server stdout]: ${data}`);
+    });
+
+    serverProcess.stderr.on('data', (data) => {
+      console.error(`[Server stderr]: ${data}`);
+    });
+
+    serverProcess.on('close', (code) => {
+      console.log(`Server process exited with code ${code}`);
+    });
   } else {
-    cmd = 'node';
-    args = [path.join(__dirname, 'dist', 'server.cjs')];
+    // In production (packaged ASAR), we cannot spawn node to run a file inside ASAR.
+    // Instead, we require it directly into the Electron main process!
+    process.env.NODE_ENV = 'production';
+    try {
+      require('./dist/server.cjs');
+      console.log('Server module required successfully in main process.');
+    } catch (err) {
+      console.error('Failed to require server module:', err);
+    }
   }
-  
-  serverProcess = spawn(cmd, args, {
-    env: { ...process.env, NODE_ENV: isDev ? 'development' : 'production' },
-    shell: true
-  });
-
-  serverProcess.stdout.on('data', (data) => {
-    console.log(`[Server stdout]: ${data}`);
-  });
-
-  serverProcess.stderr.on('data', (data) => {
-    console.error(`[Server stderr]: ${data}`);
-  });
-
-  serverProcess.on('close', (code) => {
-    console.log(`Server process exited with code ${code}`);
-  });
 }
 
 function createWindow() {
