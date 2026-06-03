@@ -1,0 +1,15 @@
+{
+  "keywords": [],
+  "drafts": [],
+  "published": [],
+  "trajectory": [],
+  "logs": [
+    {
+      "id": "log-init",
+      "timestamp": "2026-05-31T22:57:00.000Z",
+      "agent": "System",
+      "message": "Hệ thống cơ sở dữ liệu SEO Swarm Agent đã được làm sạch. Sẵnn sàng tiếp nhận từ khóa và chạy pipeline nội dung thực tế.",
+      "type": "success"
+    }
+  ]
+}

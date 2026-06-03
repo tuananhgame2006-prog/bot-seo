@@ -1,0 +1,6 @@
+{
+  "name": "Agent SEO",
+  "description": "Cỗ máy tự động hóa nội dung cấp độ doanh nghiệp (Enterprise-grade) với đại lý Multi-Agent phối hợp tối ưu hóa SEO.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
