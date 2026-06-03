@@ -11,5 +11,8 @@
       "message": "Hệ thống cơ sở dữ liệu SEO Swarm Agent đã được làm sạch. Sẵnn sàng tiếp nhận từ khóa và chạy pipeline nội dung thực tế.",
       "type": "success"
     }
-  ]
+  ],
+  "settings": {
+    "webhookUrl": "https://nhipdapcongnghe.up.railway.app/api/bot-publish"
+  }
 }

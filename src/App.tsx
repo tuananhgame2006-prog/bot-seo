@@ -643,7 +643,7 @@ export default function App() {
                 S
               </div>
               <span className="font-semibold text-[11.5px] text-slate-200 tracking-wide truncate">
-                Swarm SEO Optimizer Client (v2.8.5) — Windows Desktop Agent
+                Swarm SEO Optimizer Client (v3.0.1) — Windows Desktop Agent
               </span>
               <span className="px-1.5 py-0.2 bg-[#2d3149] text-blue-300 text-[8px] font-extrabold rounded uppercase tracking-wider scale-90 border border-blue-500/25">
                 {isActuallyElectron ? 'NATIVE WINDOW' : 'Local Host'}

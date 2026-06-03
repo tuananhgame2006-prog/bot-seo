@@ -18,17 +18,18 @@ export default function TerminalLog({
   logTerminalEndRef
 }: TerminalLogProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(true);
+  const [userToggled, setUserToggled] = React.useState(false);
 
   // Group all logs together in chronological descending/ascending order
   // We will display all logs (logs array instead of filteredLogs) for a unified feed.
   const latestLog = logs.length > 0 ? logs[logs.length - 1] : null;
 
   React.useEffect(() => {
-    // Auto-expand logs when a new entry arrives to alert the user
-    if (logs.length > 0) {
+    // Tự động mở rộng nếu có log mới, NHƯNG CHỈ khi người dùng chưa chủ động thu gọn
+    if (logs.length > 0 && !userToggled) {
       setIsCollapsed(false);
     }
-  }, [logs.length]);
+  }, [logs.length, userToggled]);
 
   return (
     <div className="p-5 pt-0 shrink-0 font-sans">
@@ -62,7 +63,10 @@ export default function TerminalLog({
             {/* Collapse / Expand Toggle Button */}
             <button
               id="toggle-terminal-log"
-              onClick={() => setIsCollapsed(!isCollapsed)}
+              onClick={() => {
+                setIsCollapsed(!isCollapsed);
+                setUserToggled(true); // Ghi nhớ quyết định của người dùng
+              }}
               className="flex items-center gap-1.5 px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg text-[10px] font-bold uppercase tracking-wider font-mono transition-all cursor-pointer border border-slate-700 hover:border-slate-600 shadow-sm"
             >
               {isCollapsed ? (
